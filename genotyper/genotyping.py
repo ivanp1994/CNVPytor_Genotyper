@@ -341,7 +341,7 @@ def get_rd_region(sample, hdf_file, chromosome, start, end, index=False):
         id_right = int(end // bin_size)
 
         len_array = len(_f[sample][chromosome])
-        region = _f[sample][chromosome][id_left:id_right+1]
+        region = _f[sample][chromosome][id_left:id_right+2]
         # compensate when the end of array is achieved
         if id_right >= len_array:
             # remove a small piece of end to work with longdiv
@@ -351,7 +351,7 @@ def get_rd_region(sample, hdf_file, chromosome, start, end, index=False):
     if not index:
         return region, bin_size, end
     index = np.arange(start=id_left*bin_size,
-                      stop=(id_right+1)*bin_size, step=bin_size)
+                      stop=(id_right+2)*bin_size, step=bin_size)
     region = pd.Series(region, index=index)
     return region
 
